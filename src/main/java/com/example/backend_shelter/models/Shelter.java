@@ -20,6 +20,5 @@ public class Shelter {
 
     @Enumerated(EnumType.STRING)
     @OneToMany
-    private List<Pet> pets; //if this is to be in place we cannot add shelter without a pet
-                            // and how to determine which pet to be added??
+    private List<Pet> pets;
 }

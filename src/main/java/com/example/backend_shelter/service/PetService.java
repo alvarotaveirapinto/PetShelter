@@ -45,10 +45,8 @@ public class PetService {
         Pet pet = petRepository.findByPetName(name).orElseThrow(
                 ()-> new PetException("PET NOT FOUND  FOR THE GIVEN NAME : " + name)
         );
-
         return pet;
     }
-
     public Pet savePetToShelter(Pet pet, Integer shelterId) {
         Shelter shelter = shelterRepository.findById(shelterId).orElseThrow(
                 () -> new PetException("SHELTER NOT FOUND WITH ID  " + shelterId)

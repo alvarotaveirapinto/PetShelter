@@ -33,7 +33,6 @@ public class AdoptionController {
     public ResponseEntity<String> petNotFoundException(PetException exception) {
         return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
-
     @GetMapping(value="/pet/{id}")
     @ApiOperation(value = "Get Pet by Id")
     public Optional<Pet> getPet(@PathVariable("id") Long id){
