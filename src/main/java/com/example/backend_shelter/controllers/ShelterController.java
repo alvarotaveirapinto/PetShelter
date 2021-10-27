@@ -1,14 +1,18 @@
 package com.example.backend_shelter.controllers;
 
+import com.example.backend_shelter.exception.ShelterException;
 import com.example.backend_shelter.models.Pet;
 import com.example.backend_shelter.models.Shelter;
 import com.example.backend_shelter.service.PetService;
 import com.example.backend_shelter.service.ShelterService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@ControllerAdvice
 public class ShelterController {
 
     @Autowired
@@ -39,6 +43,63 @@ public class ShelterController {
     public Shelter getShelterByName(@PathVariable String name)  {
         return shelterService.findByName(name);
     }
+
+
+
+
+
+    @GetMapping(value = "/shelter/get/{id}")
+    @ApiOperation(value = " Check if a shelter exists by id")
+    public Shelter getById(@PathVariable("id") Integer id) throws ShelterException {
+        return shelterService.getById(id);
+    }
+    @ExceptionHandler(value=ShelterException.class)
+    public ResponseEntity<String> shelterIdNotFound (ShelterException exception) {
+        return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
