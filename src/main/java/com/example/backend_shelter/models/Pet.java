@@ -7,7 +7,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private PetType petType;
     private String petName;
 

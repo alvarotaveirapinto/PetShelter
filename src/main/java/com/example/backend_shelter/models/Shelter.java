@@ -16,9 +16,9 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int shelterId;
     private String shelterName;
+    @Enumerated(EnumType.STRING)
     private ShelterSize shelterSize;
 
-    @Enumerated(EnumType.STRING)
     @OneToMany
     private List<Pet> pets;
 }

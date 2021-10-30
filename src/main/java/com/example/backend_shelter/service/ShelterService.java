@@ -1,6 +1,7 @@
 package com.example.backend_shelter.service;
 
 import com.example.backend_shelter.exception.ShelterException;
+import com.example.backend_shelter.exception.UpdateShelterException;
 import com.example.backend_shelter.models.Shelter;
 import com.example.backend_shelter.repositories.ShelterRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,14 @@ public class ShelterService {
             throw new ShelterException("SHELTER ID NOT FOUND " + id);
         }
 
-        //return null;
+    }
+
+
+    public Shelter editShelterById(Long id, String shelterName) {
+        Shelter shelter = shelterRepository.findById(Math.toIntExact(id)).orElseThrow(
+                () -> new UpdateShelterException("Shelter Id not Found"));
+        return shelter;
 
     }
 }
+

@@ -15,8 +15,8 @@ public class Feed {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime lunchTime;
-    @OneToOne
-    private Food food;
-    @OneToOne
-    private Pet pet;
+//    @OneToOne
+//    private Food food;
+//    @OneToOne
+//    private Pet pet;
 }

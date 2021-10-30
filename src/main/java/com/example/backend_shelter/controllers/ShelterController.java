@@ -1,8 +1,10 @@
 package com.example.backend_shelter.controllers;
 
 import com.example.backend_shelter.exception.ShelterException;
+import com.example.backend_shelter.exception.UpdateShelterException;
 import com.example.backend_shelter.models.Pet;
 import com.example.backend_shelter.models.Shelter;
+import com.example.backend_shelter.request.UpdateShelterRequest;
 import com.example.backend_shelter.service.PetService;
 import com.example.backend_shelter.service.ShelterService;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @ControllerAdvice
@@ -44,10 +48,6 @@ public class ShelterController {
         return shelterService.findByName(name);
     }
 
-
-
-
-
     @GetMapping(value = "/shelter/get/{id}")
     @ApiOperation(value = " Check if a shelter exists by id")
     public Shelter getById(@PathVariable("id") Integer id) throws ShelterException {
@@ -57,41 +57,18 @@ public class ShelterController {
     public ResponseEntity<String> shelterIdNotFound (ShelterException exception) {
         return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @PutMapping(value = "/put-edit/shelter/{id}")
+    @ApiOperation(value = "Edit shelter by id")
+    public ResponseEntity editShelterById(@PathVariable Long id, @RequestBody UpdateShelterRequest request) throws UpdateShelterException {
+        final Shelter editShelterById = shelterService.editShelterById(id, request.getShelterName());
+        return ResponseEntity.created(URI.create("/shelter" + id + "/name")).body("Updated Shelter Name");
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @ExceptionHandler(value = UpdateShelterException.class)
+    public ResponseEntity<String> updateShelter(UpdateShelterException exception) {
+        return new ResponseEntity(exception.getMessage(),HttpStatus.NOT_FOUND);
+    }
 
 
 
